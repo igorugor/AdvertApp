@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+    weatherforecast.api:
+        build:
+            context: .
+            dockerfile: Services/WeatherForecast/WeatherForecast.API/Dockerfile
+        container_name: weatherforecast-api
+        ports:
+            - '3000:8080'
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ConnectionStrings__DefaultConnection=Host=postgres;Database=advertapp;Username=app;Password=app
+        depends_on:
+            - postgres
+
+    postgres:
+        image: postgres:16
+        container_name: advertapp-postgres
+        restart: always
+        environment:
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD: app
+            POSTGRES_DB: advertapp
+        ports:
+            - '5432:5432'
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+
+volumes:
+    postgres_data:
