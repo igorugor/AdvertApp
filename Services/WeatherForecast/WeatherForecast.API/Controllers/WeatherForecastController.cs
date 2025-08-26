@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using WeatherForecast.Domain.Entities;
 
-namespace advert_app.Controllers;
+namespace WeatherForecast.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -19,9 +20,9 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    public IEnumerable<TWeatherForecast> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        return Enumerable.Range(1, 5).Select(index => new TWeatherForecast
         {
             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             TemperatureC = Random.Shared.Next(-20, 55),

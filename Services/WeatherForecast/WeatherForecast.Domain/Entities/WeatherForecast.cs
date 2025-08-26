@@ -1,6 +1,6 @@
-namespace advert_app;
+﻿namespace WeatherForecast.Domain.Entities;
 
-public class WeatherForecast
+public class TWeatherForecast
 {
     public DateOnly Date { get; set; }
 
@@ -10,3 +10,4 @@ public class WeatherForecast
 
     public string? Summary { get; set; }
 }
+
