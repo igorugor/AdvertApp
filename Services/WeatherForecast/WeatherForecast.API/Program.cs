@@ -1,6 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using WeatherForecast.Application.Interfaces;
+using WeatherForecast.Application.Features.GetWeatherForecasts;
+using WeatherForecast.Infrastructure.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<WeatherForecastDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
+builder.Services.AddScoped<GetWeatherForecastsHandler>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
